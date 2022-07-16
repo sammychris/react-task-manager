@@ -14,12 +14,19 @@ export function AddCategory({ className = '' }: AddCategoryProps) {
 
   const onAddCategory = () => {
     addCategory({key, title});
+    onClearCategory();
   }
+
+  const onClearCategory = () => {
+    setKey('');
+    setTitle('');
+  }
+
   return (
     <Card
       title="New Category"
       className={` ${className}`}
-      actions={[<Button>Clear</Button>, <Button onClick={onAddCategory}>Save</Button>]}
+      actions={[<Button onClick={onClearCategory}>Clear</Button>, <Button onClick={onAddCategory}>Save</Button>]}
     >
       <div className="grid gap-4 grid-cols-2 grid-rows-2">
         <Text variant={TextVariant.body}>Key *</Text>
