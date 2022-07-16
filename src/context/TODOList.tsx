@@ -41,10 +41,8 @@ export function TODOListProvider({ children }: TODOListProviderProps) {
 
   const removeItem = useCallback(
     (key: string) => {
-      // TODO: Add logic
-      // After making the required updates,
-      // call saveItems on the mutated reference
-      // saveItems(items);
+      const filterItems = items.filter((it) => it.key !== key);
+      saveItems(filterItems);
     },
     [items]
   );

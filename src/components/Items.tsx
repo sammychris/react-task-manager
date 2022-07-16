@@ -1,5 +1,6 @@
 import { TODOListContext } from 'context/TODOList';
 import useItems from 'hooks/useItems';
+import useItemActions from 'hooks/useItemActions';
 import React, { useContext } from 'react';
 import { TextVariant } from 'utils/constants';
 import { Button } from './Button';
@@ -13,6 +14,12 @@ export type ItemsProps = {
 
 export function Items({ category, className = '' }: ItemsProps) {
   const items = useItems();
+  const { removeItem, moveItem } = useItemActions();
+
+  const onRemoveItem = (key: string) => {
+    removeItem(key);
+  }
+
   return (
     <>
       {items
@@ -22,7 +29,7 @@ export function Items({ category, className = '' }: ItemsProps) {
             key={`cc-${idx}`}
             className={`${className}`}
             actions={[
-              <Button>{'-'}</Button>,
+              <Button onClick={() => onRemoveItem(it.key)}>{'-'}</Button>,
               <Button>{'<'}</Button>,
               <Button>{'>'}</Button>,
             ]}
