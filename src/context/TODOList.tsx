@@ -1,5 +1,5 @@
 import React, { createContext, ReactNode, useCallback, useState } from 'react';
-import { saveItem } from 'utils/storage';
+import { saveItem, getItem } from 'utils/storage';
 import useCategories from 'hooks/useCategories';
 
 export const TODOListContext = createContext<TodoListState>({
@@ -14,7 +14,9 @@ export const TODOListActionsContext = createContext<TodoListActions>({
 
 export type TODOListProviderProps = { children?: ReactNode };
 export function TODOListProvider({ children }: TODOListProviderProps) {
-  const [items, setItems] = useState<TodoListItem[]>([]);
+  const [items, setItems] = useState<TodoListItem[]>(
+    getItem<TodoListItem[]>('items') || []
+  );
   const categories = useCategories()
 
   const saveItems = (items: TodoListItem[]) => {
