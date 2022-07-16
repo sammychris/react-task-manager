@@ -32,10 +32,13 @@ export function TODOCategoriesProvider({
 
   const addCategory = useCallback(
     (category: TodoCategory) => {
-      // TODO: Add logic
-      // After making the required updates,
-      // call saveCategories on the mutated reference
-      // saveCategories(categories);
+      // key and title is empty, just return
+      if(!category.key || !category.title) return;
+
+      // cat.key already exists do nothing... just return
+      if(categories.some((cat) => cat.key === category.key)) return;
+
+      saveCategories([...categories, category]);
     },
     [categories]
   );
