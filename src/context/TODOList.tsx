@@ -72,9 +72,13 @@ export function TODOListProvider({ children }: TODOListProviderProps) {
 
    const handleCategoryDelete = useCallback(
     (catKey: string) => {
+      console.log('filter: ',{items});
       const filterItems = items.filter((it) => it.category !== catKey);
+      console.log({catKey})
+      console.log({items});
+      console.log({filterItems});
       saveItems(filterItems);
-    }, [categories]
+    }, [items]
   );
 
   return (
