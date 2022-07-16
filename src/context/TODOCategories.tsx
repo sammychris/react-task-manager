@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useCallback, useState } from 'react';
+import React, { createContext, ReactNode, useCallback, useState, useEffect } from 'react';
 import { getItem, saveItem } from 'utils/storage';
 
 export const TODOCategoriesContext = createContext<TodoCategoryState>({
@@ -53,6 +53,12 @@ export function TODOCategoriesProvider({
   /**
    * TODO: Handle setting up default categories
    */
+
+   useEffect(() => {
+    let storesCat = DefaulCategories;
+    if(categories.length) storesCat = categories;
+    setCategories([...storesCat]);
+  }, [])
 
   return (
     <TODOCategoryActionsContext.Provider
