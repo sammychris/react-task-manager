@@ -48,13 +48,21 @@ export function TODOListProvider({ children }: TODOListProviderProps) {
   );
 
   const moveItem = useCallback(
-    (key: string, category: string) => {
-      // TODO: Add logic
-      // After making the required updates,
-      // call saveItems on the mutated reference
-      // saveItems(items);
+    (key: string, category: string, movement: number) => {      
+      const catIndex = categories.findIndex((cat) => cat.key === category);
+      const nextCategory = categories[catIndex + movement];
+  
+      if(!nextCategory) return;
+
+      const mappedItems = items.map(it => {
+        if(it.key === key) {
+          it.category = nextCategory.key
+        }
+        return it;
+      });
+      saveItems(mappedItems);
     },
-    [items]
+    [items, categories]
   );
 
   /**

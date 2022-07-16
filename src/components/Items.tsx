@@ -20,6 +20,16 @@ export function Items({ category, className = '' }: ItemsProps) {
     removeItem(key);
   }
 
+  const onMoveForward = (key: string, category: string) => {
+    const movement = 1;
+    moveItem(key, category, movement);
+  }
+
+  const onMoveBackForward = (key: string, category: string) => {
+    const movement = -1;
+    moveItem(key, category, movement);
+  }
+
   return (
     <>
       {items
@@ -30,8 +40,8 @@ export function Items({ category, className = '' }: ItemsProps) {
             className={`${className}`}
             actions={[
               <Button onClick={() => onRemoveItem(it.key)}>{'-'}</Button>,
-              <Button>{'<'}</Button>,
-              <Button>{'>'}</Button>,
+              <Button onClick={() => onMoveBackForward(it.key, it.category)}>{'<'}</Button>,
+              <Button onClick={() => onMoveForward(it.key, it.category)}>{'>'}</Button>,
             ]}
           >
             {it.description.split('\n').map((l, lIdx) => (
