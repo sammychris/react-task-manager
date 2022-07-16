@@ -15,10 +15,10 @@ export const TODOListActionsContext = createContext<TodoListActions>({
 
 export type TODOListProviderProps = { children?: ReactNode };
 export function TODOListProvider({ children }: TODOListProviderProps) {
+  const categories = useCategories();
   const [items, setItems] = useState<TodoListItem[]>(
     getItem<TodoListItem[]>('items') || []
   );
-  const categories = useCategories()
 
   const saveItems = (items: TodoListItem[]) => {
     setItems(items.map((it, itIdx) => ({ ...it, key: `item-${itIdx}` })));
@@ -72,11 +72,7 @@ export function TODOListProvider({ children }: TODOListProviderProps) {
 
    const handleCategoryDelete = useCallback(
     (catKey: string) => {
-      console.log('filter: ',{items});
       const filterItems = items.filter((it) => it.category !== catKey);
-      console.log({catKey})
-      console.log({items});
-      console.log({filterItems});
       saveItems(filterItems);
     }, [items]
   );
