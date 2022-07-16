@@ -13,7 +13,7 @@ type TodoListActions = {
     item: Omit<TodoListItem, 'category' | 'key'> & { category?: string }
   ) => void;
   removeItem: (key: string) => void;
-  moveItem: (key: string, category: string) => void;
+  moveItem: (key: string, category: string, movement: number) => void;
 };
 
 type TodoCategory = {

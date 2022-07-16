@@ -9,7 +9,7 @@ export const TODOListContext = createContext<TodoListState>({
 export const TODOListActionsContext = createContext<TodoListActions>({
   addItem: (item) => {},
   removeItem: (key) => {},
-  moveItem: (key, category) => {},
+  moveItem: (key, category, movement) => {},
 });
 
 export type TODOListProviderProps = { children?: ReactNode };
