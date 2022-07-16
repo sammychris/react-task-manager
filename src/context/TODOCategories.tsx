@@ -45,10 +45,8 @@ export function TODOCategoriesProvider({
 
   const removeCategory = useCallback(
     (key: string) => {
-      // TODO: Add logic
-      // After making the required updates,
-      // call saveCategories on the mutated reference
-      // saveCategories(categories);
+      const filterCategories = categories.filter((cat) => cat.key !== key);
+      saveCategories(filterCategories);
     },
     [categories]
   );
