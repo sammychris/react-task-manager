@@ -10,6 +10,7 @@ export const TODOListActionsContext = createContext<TodoListActions>({
   addItem: (item) => {},
   removeItem: (key) => {},
   moveItem: (key, category, movement) => {},
+  handleCategoryDelete: (catKey) => {},
 });
 
 export type TODOListProviderProps = { children?: ReactNode };
@@ -69,8 +70,15 @@ export function TODOListProvider({ children }: TODOListProviderProps) {
    * TODO: Handle category being deleted
    */
 
+   const handleCategoryDelete = useCallback(
+    (catKey: string) => {
+      const filterItems = items.filter((it) => it.category !== catKey);
+      saveItems(filterItems);
+    }, [categories]
+  );
+
   return (
-    <TODOListActionsContext.Provider value={{ addItem, removeItem, moveItem }}>
+    <TODOListActionsContext.Provider value={{ addItem, removeItem, moveItem, handleCategoryDelete }}>
       <TODOListContext.Provider value={{ items }}>
         {children}
       </TODOListContext.Provider>

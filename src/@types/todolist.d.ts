@@ -14,6 +14,7 @@ type TodoListActions = {
   ) => void;
   removeItem: (key: string) => void;
   moveItem: (key: string, category: string, movement: number) => void;
+  handleCategoryDelete: (catKey: string) => void;
 };
 
 type TodoCategory = {

@@ -1,5 +1,6 @@
 import useCategories from 'hooks/useCategories';
 import useCategoryActions from 'hooks/useCategoryActions';
+import useItemActions from 'hooks/useItemActions';
 import React from 'react';
 import { Button } from './Button';
 import { ContentColumn } from './ContentColumn';
@@ -12,9 +13,11 @@ export type CategoriesProps = {
 export function Categories({ className = '' }: CategoriesProps) {
   const categories = useCategories();
   const { removeCategory } = useCategoryActions();
+  const { handleCategoryDelete } = useItemActions();
 
   const onRemoveCategory = (key: string) => {
     removeCategory(key);
+    handleCategoryDelete(key);
   }
   
   return (
