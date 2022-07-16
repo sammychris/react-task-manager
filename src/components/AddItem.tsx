@@ -16,24 +16,29 @@ export function AddItem({ className = '' }: AddItemProps) {
 
   const onAddItem = () => {
     addItem({ category, description });
+    onClearItems();
+  }
 
+  const onClearItems = () => {
+    setDescription('');
+    setCategory('');
   }
 
   return (
     <Card
       title="New Item"
       className={` ${className}`}
-      actions={[<Button>Clear</Button>, <Button onClick={onAddItem}>Save</Button>]}
+      actions={[<Button onClick={onClearItems}>Clear</Button>, <Button onClick={onAddItem}>Save</Button>]}
     >
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-4">
           <Text variant={TextVariant.body}>Description *</Text>
-          <textarea rows={5} className="px-1 rounded-md border-px" onChange={e => setDescription(e.target.value)} />
+          <textarea rows={5} value={description} className="px-1 rounded-md border-px" onChange={e => setDescription(e.target.value)}/>
         </div>
 
         <div className="grid gap-4 grid-cols-2 grid-rows-1">
           <Text variant={TextVariant.body}>Category</Text>
-          <select className="px-1 rounded-md border-px"  onChange={e => setCategory(e.target.value)}>
+          <select value={category} className="px-1 rounded-md border-px" onChange={e => setCategory(e.target.value)}>
             <option>None</option>
             {
               categories.map((cat, aIdx) => <option value={cat.key} key={aIdx}>{cat.key}</option>)
